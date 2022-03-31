@@ -44,25 +44,33 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      body: Column(children: [
+        Text('Hello World!'),
+        Text('Hello Flutter'),
+        TextButton(
+          onPressed: () => {print('Hello kyosuke')},
+          child: Text('kyosuke')
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Icon(
+              Icons.favorite,
+              color: Colors.pink,
+              size: 24.0,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Icon(
+              Icons.audiotrack,
+              color: Colors.green,
+              size: 30.0,
+            ),
+            Icon(
+              Icons.beach_access,
+              color: Colors.blue,
+              size: 30.0,
             ),
           ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        )
+      ]));
   }
 }
