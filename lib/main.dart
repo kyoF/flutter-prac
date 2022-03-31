@@ -42,35 +42,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(children: [
-        Text('Hello World!'),
-        Text('Hello Flutter'),
-        TextButton(
-          onPressed: () => {print('Hello kyosuke')},
-          child: Text('kyosuke')
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Icon(
-              Icons.favorite,
-              color: Colors.pink,
-              size: 24.0,
-            ),
-            Icon(
-              Icons.audiotrack,
-              color: Colors.green,
-              size: 30.0,
-            ),
-            Icon(
-              Icons.beach_access,
-              color: Colors.blue,
-              size: 30.0,
-            ),
-          ],
-        )
-      ]));
+        title: Row(children: [
+          Icon(Icons.create),
+          Text('Hello world from title'),
+        ])),
+        drawer: Drawer(child: Center(child: Text('Drawer'),)),
+        endDrawer: Drawer(child: Center(child: Text('Drawer'),)),
+      body: Text('Hello World!'),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => {print('under button')},
+          child: Icon(Icons.tiktok)),
+    );
   }
 }
