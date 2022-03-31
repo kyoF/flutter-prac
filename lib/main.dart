@@ -62,10 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headline4,
             ),
             Text('$_type', style: TextStyle(fontSize: 20, color: Colors.red)),
-            if (_type == 'even')
-              Text('even no odd kan'),
-            if (_type == 'odd')
-              Text('sonnna koto naiyo'),
           ],
         ),
       ),
