@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -62,6 +63,17 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headline4,
             ),
             Text('$_type', style: TextStyle(fontSize: 20, color: Colors.red)),
+            TextButton(
+              onPressed: () async {
+                String url = Uri.encodeFull('https://www.google.com');
+                if (await canLaunch(url)) {
+                  await launch(url);
+                } else {
+                  print('error');
+                }
+              },
+              child: Icon(Icons.g_mobiledata, size: 30)
+            )
           ],
         ),
       ),
