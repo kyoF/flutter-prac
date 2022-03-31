@@ -31,10 +31,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String _type = 'even';
 
   void _incrementCounter() {
     setState(() {
       _counter++;
+      if (_counter % 2 == 0) {
+        _type = 'even';
+      } else {
+        _type = 'odd';
+      }
     });
   }
 
@@ -42,16 +48,32 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(children: [
-          Icon(Icons.create),
-          Text('Hello world from title'),
-        ])),
-        drawer: Drawer(child: Center(child: Text('Drawer'),)),
-        endDrawer: Drawer(child: Center(child: Text('Drawer'),)),
-      body: Text('Hello World!'),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => {print('under button')},
-          child: Icon(Icons.tiktok)),
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            Text('$_type', style: TextStyle(fontSize: 20, color: Colors.red)),
+            if (_type == 'even')
+              Text('even no odd kan'),
+            if (_type == 'odd')
+              Text('sonnna koto naiyo'),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
