@@ -60,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
+              key: Key('counter'),
               style: Theme.of(context).textTheme.headline4,
             ),
             Text('$_type', style: TextStyle(fontSize: 20, color: Colors.red)),
@@ -78,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        key: Key('increment'),
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
