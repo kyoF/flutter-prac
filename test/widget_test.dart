@@ -6,7 +6,7 @@ import 'package:hello_world_from_flutter/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // 画面を構築する
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(MyApp());
 
     // 0が書かれているWidgetが1つであることをテスト
     expect(find.text('0'), findsOneWidget);
