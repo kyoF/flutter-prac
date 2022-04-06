@@ -8,8 +8,8 @@ class TestPage3 extends StatelessWidget {
           title: Text('Test3'),
         ),
         body: Center(
-            child: TextButton(
-                onPressed: () => {Navigator.of(context).pop()},
-                child: Text('BACK', style: TextStyle(fontSize: 80)))));
+            child: Container(
+                color: Colors.greenAccent,
+                child: Text('TEST3', style: TextStyle(fontSize: 80)))));
   }
 }

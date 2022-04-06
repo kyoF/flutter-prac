@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world_from_flutter/TestPage3.dart';
 
 class TestPage2 extends StatelessWidget {
   @override
@@ -9,14 +8,8 @@ class TestPage2 extends StatelessWidget {
           title: Text('Test2'),
         ),
         body: Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          TextButton(
-              onPressed: () => {Navigator.of(context).pushNamed("/test3")},
-              child: Text('NEXT', style: TextStyle(fontSize: 80))),
-          TextButton(
-              onPressed: () => {Navigator.of(context).pop()},
-              child: Text('BACK', style: TextStyle(fontSize: 80)))
-        ])));
+            child: Container(
+                color: Colors.greenAccent,
+                child: Text('TEST2', style: TextStyle(fontSize: 80)))));
   }
 }

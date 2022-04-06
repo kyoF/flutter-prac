@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world_from_flutter/TestPage2.dart';
 
 class TestPage1 extends StatelessWidget {
   @override
@@ -7,8 +6,8 @@ class TestPage1 extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(title: Text('Test1')),
         body: Center(
-            child: TextButton(
-                onPressed: () => {Navigator.of(context).pushNamed("/test2")},
-                child: Text('NEXT', style: TextStyle(fontSize: 80)))));
+            child: Container(
+                color: Colors.redAccent,
+                child: Text('TEST1', style: TextStyle(fontSize: 80)))));
   }
 }
