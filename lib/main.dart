@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hello_world_from_flutter/TestPage1.dart';
+import 'package:hello_world_from_flutter/TestPage2.dart';
+import 'package:hello_world_from_flutter/TestPage3.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,9 +14,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue, 
+        primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page')
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {
+        "/test1": (BuildContext context) => TestPage1(),
+        "/test2": (BuildContext context) => TestPage2(),
+        "/test3": (BuildContext context) => TestPage3(),
+      },
     );
   }
 }
