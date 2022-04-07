@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'package:hello_world_from_flutter/async.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,39 +26,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation _animation;
+  int _counter = 0;
 
-  _play() async {
+  void _incrementCounter() {
     setState(() {
-      _animationController.forward();
+      _counter++;
     });
-  }
-
-  _stop() async {
-    setState(() {
-      _animationController.stop();
-    });
-  }
-
-  _reverse() async {
-    setState(() {
-      _animationController.reverse();
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 1));
-    _animation = _animationController.drive(Tween(begin: 0.0, end: 2.0 * pi));
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
+    Async().asynctest1();
   }
 
   @override
@@ -68,22 +42,20 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         title: Text(widget.title!),
       ),
       body: Center(
-        child: AnimatedBuilder(
-            animation: _animation,
-            builder: (context, _) {
-              return Transform.rotate(
-                  angle: _animation.value,
-                  child: Icon(Icons.cached, size: 100));
-            }),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('You have pushed the button this many times:'),
+              Text('$_counter',
+                  key: Key('counter'),
+                  style: Theme.of(context).textTheme.headline4)
+            ]),
       ),
-      floatingActionButton:
-          Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-        FloatingActionButton(
-            onPressed: _play, child: Icon(Icons.arrow_forward)),
-        FloatingActionButton(onPressed: _stop, child: Icon(Icons.pause)),
-        FloatingActionButton(
-            onPressed: _reverse, child: Icon(Icons.arrow_back)),
-      ]),
+      floatingActionButton: FloatingActionButton(
+          key: Key('increment'),
+          onPressed: _incrementCounter,
+          tooltip: 'Increment',
+          child: Icon(Icons.add)),
     );
   }
 }
