@@ -41,11 +41,46 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   int _msg_counter = 0;
+  String _edit_msg = 'hello world!';
+  String _show_msg = 'hello world!';
 
-  void _sendMessage() {
-    setState(() {
-      _msg_counter++;
-    });
+  Future<void> _InputDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('メッセージ'),
+            content: TextField(
+                decoration: InputDecoration(hintText: 'いまどうしてる？'),
+                onChanged: (value) {
+                  setState(() {
+                    _edit_msg = value;
+                  });
+                }),
+            actions: <Widget>[
+              FlatButton(
+                color: Colors.white,
+                textColor: Colors.blue,
+                child: Text('送る'),
+                onPressed: () {
+                  setState(() {
+                    _msg_counter++;
+                    _show_msg = _edit_msg;
+                  });
+                  Navigator.pop(context);
+                },
+              ),
+              FlatButton(
+                color: Colors.white,
+                textColor: Colors.blue,
+                child: Text('戻る'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )
+            ],
+          );
+        });
   }
 
   @override
@@ -68,6 +103,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 '$_msg_counter',
                 style: Theme.of(context).textTheme.headline4,
               ),
+              Text(
+                '$_show_msg',
+                style: Theme.of(context).textTheme.headline4,
+              ),
             ],
           ),
         ),
@@ -78,7 +117,9 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Icon(Icons.add),
           ),
           FloatingActionButton(
-            onPressed: _sendMessage,
+            onPressed: () {
+              _InputDialog(context);
+            },
             tooltip: 'send message',
             child: Icon(Icons.send),
           ),
