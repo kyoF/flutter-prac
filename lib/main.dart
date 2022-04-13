@@ -6,7 +6,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -41,34 +40,48 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  int _msg_counter = 0;
+
+  void _sendMessage() {
+    setState(() {
+      _msg_counter++;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Text('$_type', style: TextStyle(fontSize: 20, color: Colors.red)),
-            if (_type == 'even') Text('even no odd kan'),
-            if (_type == 'odd') Text('sonnna koto naiyo'),
-          ],
+        appBar: AppBar(
+          title: Text(widget.title),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
-    );
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('You have pushed the button this many times:'),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              Text('$_type', style: TextStyle(fontSize: 20, color: Colors.red)),
+              Text(
+                '$_msg_counter',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: Column(mainAxisSize: MainAxisSize.min, children: [
+          FloatingActionButton(
+            onPressed: _incrementCounter,
+            tooltip: 'Increment',
+            child: Icon(Icons.add),
+          ),
+          FloatingActionButton(
+            onPressed: _sendMessage,
+            tooltip: 'send message',
+            child: Icon(Icons.send),
+          ),
+        ]));
   }
 }
