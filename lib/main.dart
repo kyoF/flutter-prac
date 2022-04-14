@@ -27,15 +27,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  String _type = 'even';
+  String _type = 'EVEN';
 
   void _incrementCounter() {
     setState(() {
       _counter++;
       if (_counter % 2 == 0) {
-        _type = 'even';
+        _type = 'EVEN';
       } else {
-        _type = 'odd';
+        _type = 'ODD';
       }
     });
   }
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  List<Widget> show_all_msg() {
+  List<Widget> _show_all_msg() {
     final List<Widget> _all_msg = <Widget>[];
     for (String msg in _show_msg) {
       _all_msg.add(ListTile(title: Text(msg)));
@@ -107,14 +107,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: Theme.of(context).textTheme.headline4,
               ),
               Text('$_type', style: TextStyle(fontSize: 20, color: Colors.red)),
+              Text('Total Number of messages:'),
               Text(
                 '$_msg_counter',
                 style: Theme.of(context).textTheme.headline4,
               ),
-              Expanded(
-                  child: ListView(
-                children: show_all_msg(),
-              ))
+              LimitedBox(
+                  maxHeight: 500, child: ListView(children: _show_all_msg())),
             ],
           ),
         ),
