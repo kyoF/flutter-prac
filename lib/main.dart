@@ -41,8 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   int _msg_counter = 0;
-  String _edit_msg = 'hello world!';
-  String _show_msg = 'hello world!';
+  String _edit_msg = '';
+  List<String> _show_msg = ['hello world!'];
 
   Future<void> _InputDialog(BuildContext context) async {
     return showDialog(
@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   setState(() {
                     _msg_counter++;
-                    _show_msg = _edit_msg;
+                    _show_msg.add(_edit_msg);
                   });
                   Navigator.pop(context);
                 },
@@ -81,6 +81,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           );
         });
+  }
+
+  List<Widget> show_all_msg() {
+    final List<Widget> _all_msg = <Widget>[];
+    for (String msg in _show_msg) {
+      _all_msg.add(ListTile(title: Text(msg)));
+    }
+    return _all_msg;
   }
 
   @override
@@ -103,10 +111,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 '$_msg_counter',
                 style: Theme.of(context).textTheme.headline4,
               ),
-              Text(
-                '$_show_msg',
-                style: Theme.of(context).textTheme.headline4,
-              ),
+              Expanded(
+                  child: ListView(
+                children: show_all_msg(),
+              ))
             ],
           ),
         ),
