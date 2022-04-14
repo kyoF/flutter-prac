@@ -1,135 +1,56 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-void main() {
-  runApp(const MyApp());
-}
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'Flutter Google Maps Demo',
+      home: MapSample(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+class MapSample extends StatefulWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MapSample> createState() => MapSampleState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  String _type = 'EVEN';
+class MapSampleState extends State<MapSample> {
+  Completer<GoogleMapController> _controller = Completer();
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-      if (_counter % 2 == 0) {
-        _type = 'EVEN';
-      } else {
-        _type = 'ODD';
-      }
-    });
-  }
+  static final CameraPosition _kGooglePlex = CameraPosition(
+      target: LatLng(37.42796133580664, -122.085749655962), zoom: 14.4746);
 
-  int _msg_counter = 0;
-  String _edit_msg = '';
-  List<String> _show_msg = ['hello world!'];
-
-  Future<void> _InputDialog(BuildContext context) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('メッセージ'),
-            content: TextField(
-                decoration: InputDecoration(hintText: 'いまどうしてる？'),
-                onChanged: (value) {
-                  setState(() {
-                    _edit_msg = value;
-                  });
-                }),
-            actions: <Widget>[
-              FlatButton(
-                color: Colors.white,
-                textColor: Colors.blue,
-                child: Text('送る'),
-                onPressed: () {
-                  setState(() {
-                    _msg_counter++;
-                    _show_msg.add(_edit_msg);
-                  });
-                  Navigator.pop(context);
-                },
-              ),
-              FlatButton(
-                color: Colors.white,
-                textColor: Colors.blue,
-                child: Text('戻る'),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              )
-            ],
-          );
-        });
-  }
-
-  List<Widget> _show_all_msg() {
-    final List<Widget> _all_msg = <Widget>[];
-    for (String msg in _show_msg) {
-      _all_msg.add(ListTile(title: Text(msg)));
-    }
-    return _all_msg;
-  }
+  static final CameraPosition _kLake = CameraPosition(
+      bearing: 192.8334901395799,
+      target: LatLng(37.43296265331129, -122.08832357078792),
+      tilt: 59.440717697143555,
+      zoom: 19.151926040649414);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('You have pushed the button this many times:'),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              Text('$_type', style: TextStyle(fontSize: 20, color: Colors.red)),
-              Text('Total Number of messages:'),
-              Text(
-                '$_msg_counter',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              LimitedBox(
-                  maxHeight: 500, child: ListView(children: _show_all_msg())),
-            ],
-          ),
-        ),
-        floatingActionButton: Column(mainAxisSize: MainAxisSize.min, children: [
-          FloatingActionButton(
-            onPressed: _incrementCounter,
-            tooltip: 'Increment',
-            child: Icon(Icons.add),
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              _InputDialog(context);
-            },
-            tooltip: 'send message',
-            child: Icon(Icons.send),
-          ),
-        ]));
+      body: GoogleMap(
+          mapType: MapType.hybrid,
+          initialCameraPosition: _kGooglePlex,
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          }),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: _goToTheLake,
+        label: Text('To the Lake!'),
+        icon: Icon(Icons.directions_boat),
+      ),
+    );
+  }
+
+  Future<void> _goToTheLake() async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 }
