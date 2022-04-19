@@ -37,12 +37,27 @@ class MapSampleState extends State<MapSample> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
+      appBar: AppBar(
+          title: Text('Flutter Demo with Google Map'),
+          backgroundColor: Colors.blue[900]),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 6,
+            child: GoogleMap(
+              mapType: MapType.hybrid,
+              initialCameraPosition: _kGooglePlex,
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+            ),
+          ),
+          Expanded(
+              flex: 4,
+              child: Container(
+                color: Colors.white,
+              ))
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _goToTheLake,
