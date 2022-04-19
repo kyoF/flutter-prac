@@ -18,8 +18,16 @@
 
   <title>hello_world_from_flutter</title>
   <link rel="manifest" href="manifest.json">
-
-  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script>
+    fetch('../env.json')
+      .then(response => response.json())
+      .then(data => {
+        const google_map_script_tag = document.createElement('script');
+        const google_map_src = "https://maps.googleapis.com/maps/api/js";
+        google_map_script_tag.src = google_map_src + "?key=" + data.api_key;
+        document.head.appendChild(google_map_script_tag);
+      });
+  </script>
 </head>
 <body>
   <script>
