@@ -45,7 +45,7 @@ class MapSampleState extends State<MapSample> {
           Expanded(
             flex: 6,
             child: GoogleMap(
-              mapType: MapType.hybrid,
+              mapType: MapType.normal,
               initialCameraPosition: _kGooglePlex,
               onMapCreated: (GoogleMapController controller) {
                 _controller.complete(controller);
