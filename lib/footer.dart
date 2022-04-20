@@ -10,10 +10,26 @@ class Footer extends StatefulWidget {
 class _Footer extends State {
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(items: const [
-      BottomNavigationBarItem(icon: Icon(Icons.search), label: '検索'),
-      BottomNavigationBarItem(icon: Icon(Icons.star), label: 'お気に入り'),
-      BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
-    ]);
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          label: '検索',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.attachment),
+          label: '保存した条件',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.history),
+          label: '閲覧履歴',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.favorite),
+          label: 'お気に入り',
+        ),
+      ],
+    );
   }
 }
