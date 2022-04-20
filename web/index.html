@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
@@ -31,11 +18,18 @@
 
   <title>hello_world_from_flutter</title>
   <link rel="manifest" href="manifest.json">
+  <script>
+    fetch('../env.json')
+      .then(response => response.json())
+      .then(data => {
+        const google_map_script_tag = document.createElement('script');
+        const google_map_src = "https://maps.googleapis.com/maps/api/js";
+        google_map_script_tag.src = google_map_src + "?key=" + data.api_key;
+        document.head.appendChild(google_map_script_tag);
+      });
+  </script>
 </head>
 <body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
-       application. For more information, see:
-       https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
